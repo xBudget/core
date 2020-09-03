@@ -1,0 +1,9 @@
+language: csharp
+solution: xBudget.sln
+mono: none
+dotnet: 3.1.302
+
+script:
+  - dotnet restore xBudget.sln
+  - dotnet build xBudget.sln
+  - sonar-scanner
