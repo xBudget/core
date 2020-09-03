@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{0527E113-88A7-43A8-9AAC-920E5AF01942}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xBudget.Web", "src\web\xBudget.Web\xBudget.Web.csproj", "{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xBudget.Web", "src\Web\xBudget.Web\xBudget.Web.csproj", "{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xBudget.Identity.Api", "src\Services\xBudget.Identity.Api\xBudget.Identity.Api.csproj", "{392371EB-1198-4892-8C52-9D766A337CA1}"
 EndProject
