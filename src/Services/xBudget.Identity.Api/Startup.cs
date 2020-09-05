@@ -29,11 +29,25 @@ namespace xBudget.Identity.Api
                 .AddDefaultTokenProviders();
 
             services.AddControllers();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("xBudget.Identity", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "xBudget Identity API."
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/xBudget.Identity/swagger.json", "xBudget.Identity");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
