@@ -7,7 +7,7 @@ namespace xBudget.Lib.Test.Extensions
 {
     public static class TestHttpClientExtensions
     {
-        public static async Task<T> ReadAsObject<T>(this HttpContent httpContent)
+        public static async Task<T> ReadAsObjectAsync<T>(this HttpContent httpContent)
         {
             var responseString = await httpContent.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseString);

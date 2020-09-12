@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using xBudget.Identity.Api.Extensions;
@@ -40,9 +39,9 @@ namespace xBudget.Identity.Api.Services
 
             return new ServiceResult<string>
             {
-                Errors = new List<string>
+                Errors = new Dictionary<string, IList<string>>
                 {
-                    "Invalid Email or Password."
+                    { "", new List<string> { "Invalid Email or Password" }}
                 }
             };
         }
@@ -66,10 +65,13 @@ namespace xBudget.Identity.Api.Services
                 };
             }
 
-            return new ServiceResult<string>
+            var errorResult = new ServiceResult<string>();
+            foreach (var error in result.Errors)
             {
-                Errors = result.Errors.Select(x => x.Description).ToList()
-            };
+                errorResult.Errors.Add(error.Code, new List<string> { error.Description });
+            }
+
+            return errorResult;
         }
 
         private async Task<string> GenerateJwt(string userEmail)
