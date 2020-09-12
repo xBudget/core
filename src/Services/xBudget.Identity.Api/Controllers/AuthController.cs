@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using xBudget.Identity.Api.Models;
+using xBudget.Identity.Api.Services;
 
 namespace xBudget.Identity.Api.Controllers
 {
@@ -10,13 +10,11 @@ namespace xBudget.Identity.Api.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IAuthService _authService;
 
-        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public AuthController(IAuthService authService)
         {
-            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _authService = authService ?? throw new ArgumentNullException(nameof(authService));
         }
 
         [HttpPost("register")]
@@ -27,21 +25,20 @@ namespace xBudget.Identity.Api.Controllers
                 return BadRequest();
             }
 
-            var user = new IdentityUser
+            try
             {
-                UserName = viewModel.Email,
-                Email = viewModel.Email,
-                EmailConfirmed = true
-            };
+                var result = await _authService.Register(viewModel);
+                if (result.Success)
+                {
+                    return Ok(new { token = result.Result });
+                }
 
-            var result = await _userManager.CreateAsync(user, viewModel.Password);
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, false);
-                return Ok();
+                return BadRequest(new { errors = result.Errors });
             }
-
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
 
         [HttpPost("login")]
@@ -52,13 +49,13 @@ namespace xBudget.Identity.Api.Controllers
                 return BadRequest();
             }
 
-            var result = await _signInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, true);
-            if (result.Succeeded)
+            var result = await _authService.Login(viewModel);
+            if (result.Success)
             {
-                return Ok();
+                return Ok(new { token = result.Result });
             }
 
-            return BadRequest();
+            return BadRequest(new { errors = result.Errors });
         }
     }
 }
