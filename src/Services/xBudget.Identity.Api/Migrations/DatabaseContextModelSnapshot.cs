@@ -8,7 +8,7 @@ using xBudget.Identity.Api.Database;
 
 namespace xBudget.Identity.Api.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(IdentityDatabaseContext))]
     partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -9,7 +9,7 @@ using xBudget.Identity.Api.Database;
 
 namespace xBudget.Identity.Api.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(IdentityDatabaseContext))]
     [Migration("20200903223252_Initial")]
     partial class Initial
     {

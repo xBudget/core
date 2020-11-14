@@ -21,6 +21,11 @@ namespace xBudget.Account.Api.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create(CreateAccountApiModel createAccountViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             try
             {
                 await _accountRepository.Create(new AccountDto

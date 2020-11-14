@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace xBudget.Identity.Api.Database
 {
-    public class DatabaseContext : IdentityDbContext
+    public class IdentityDatabaseContext : IdentityDbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        public IdentityDatabaseContext(DbContextOptions<IdentityDatabaseContext> options) : base(options)
         {
 
         }
