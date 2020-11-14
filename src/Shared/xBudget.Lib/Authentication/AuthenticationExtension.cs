@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace xBudget.Identity.Api.Extensions
+namespace xBudget.Lib.Authentication
 {
     public static class AuthenticationExtension
     {

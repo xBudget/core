@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using xBudget.Identity.Api.Database;
-using xBudget.Identity.Api.Extensions;
+using xBudget.Account.Api.Database;
+using xBudget.Account.Api.Extensions;
 using xBudget.Lib.Authentication;
 
-namespace xBudget.Identity.Api
+namespace xBudget.Account.Api
 {
     public class Startup
     {
@@ -22,23 +21,19 @@ namespace xBudget.Identity.Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<DatabaseContext>()
-                .AddDefaultTokenProviders();
+        {
+            services.AddDbContext<AccountDatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.UseJwtAuthentication(Configuration);
-            services.UseCustomServices();
             services.AddControllers();
+
+            services.UseCustomServices();
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("xBudget.Identity", new Microsoft.OpenApi.Models.OpenApiInfo
+                options.SwaggerDoc("xBudget.Account", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Title = "xBudget Identity API."
+                    Title = "xBudget Account API."
                 });
             });
         }
@@ -49,7 +44,7 @@ namespace xBudget.Identity.Api
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/xBudget.Identity/swagger.json", "xBudget.Identity");
+                options.SwaggerEndpoint("/swagger/xBudget.Account/swagger.json", "xBudget.Account");
             });
 
             if (env.IsDevelopment())
@@ -59,7 +54,6 @@ namespace xBudget.Identity.Api
 
             app.UseRouting();
 
-            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
