@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using System.IO;
 
 namespace xBudget.Gateway
@@ -9,20 +10,20 @@ namespace xBudget.Gateway
     {
         public static void Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
-                            .SetBasePath(Directory.GetCurrentDirectory())
-                            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                            .AddJsonFile("ocelot.json")
-                            .Build();
-
-            CreateHostBuilder(args, configuration).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args, IConfiguration config) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory())
+                            .AddJsonFile($"ocelot.json", optional: false)
+                            .AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true)
+                            .Build();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseConfiguration(config);
                     webBuilder.UseStartup<Startup>();
                 });
     }
