@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  gateway:
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: src/Services/xBudget.Gateway/Dockerfile
+    ports:
+      - 8000:80
+
+  account:
+    container_name: account
+    build:
+      context: .
+      dockerfile: src/Services/xBudget.Account.Api/Dockerfile
+
+  idendity:
+    container_name: identity
+    build:
+      context: .
+      dockerfile: src/Services/xBudget.Identity.Api/Dockerfile
