@@ -4,7 +4,7 @@
   },
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -13,10 +13,10 @@
         }
       ],
       "UpstreamPathTemplate": "/api/auth/{everything}",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": ["POST", "GET"]
     },
     {
-      "DownstreamPathTemplate": "/api/account/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -25,7 +25,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/account/{everything}",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": ["POST", "GET"]
     }
   ]
 }
