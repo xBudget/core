@@ -7,10 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{004B9A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A95DF606-44B1-444F-997F-6105D8F73FE6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{0527E113-88A7-43A8-9AAC-920E5AF01942}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xBudget.Web", "src\Web\xBudget.Web\xBudget.Web.csproj", "{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xBudget.Identity.Api", "src\Services\xBudget.Identity.Api\xBudget.Identity.Api.csproj", "{392371EB-1198-4892-8C52-9D766A337CA1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xBudget.Identity.Test", "src\Services\xBudget.Identity.Test\xBudget.Identity.Test.csproj", "{3EFB98E5-D12A-4765-9DF8-30CBB55843F5}"
@@ -25,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{9068
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xBudget.Account.Test", "src\Services\xBudget.Account.Test\xBudget.Account.Test.csproj", "{2483BE83-8AF1-4DA3-ABBC-E91F12C018BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xBudget.Gateway", "src\Services\xBudget.Gateway\xBudget.Gateway.csproj", "{B6BE8B35-ABC1-40BF-A2B2-A94919E48F77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xBudget.Gateway", "src\Services\xBudget.Gateway\xBudget.Gateway.csproj", "{B6BE8B35-ABC1-40BF-A2B2-A94919E48F77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{392371EB-1198-4892-8C52-9D766A337CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{392371EB-1198-4892-8C52-9D766A337CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{392371EB-1198-4892-8C52-9D766A337CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -66,7 +58,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1DC1E47A-FD05-4FA4-AD62-7EDB0B328C98} = {0527E113-88A7-43A8-9AAC-920E5AF01942}
 		{392371EB-1198-4892-8C52-9D766A337CA1} = {48FFC633-4ADC-4800-80F5-F11CEB797618}
 		{3EFB98E5-D12A-4765-9DF8-30CBB55843F5} = {48FFC633-4ADC-4800-80F5-F11CEB797618}
 		{F58B3537-5612-4800-AC9A-CD577101A01F} = {004B9A0E-3925-45B3-925D-CC5437732FF3}
