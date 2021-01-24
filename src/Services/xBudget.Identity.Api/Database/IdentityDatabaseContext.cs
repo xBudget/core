@@ -7,7 +7,7 @@ namespace xBudget.Identity.Api.Database
     {
         public IdentityDatabaseContext(DbContextOptions<IdentityDatabaseContext> options) : base(options)
         {
-
+            
         }
     }
 }
