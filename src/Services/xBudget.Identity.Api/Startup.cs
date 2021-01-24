@@ -73,7 +73,11 @@ namespace xBudget.Identity.Api
                 var services = scope.ServiceProvider;
                 using (var databaseContext = services.GetService<IdentityDatabaseContext>())
                 {
-                    databaseContext.Database.Migrate();
+                    // skipe migration if the provider is InMemory (provider used on tests)
+                    if (databaseContext.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+                    {
+                        databaseContext.Database.Migrate();
+                    }                    
                 }
             }
         }
