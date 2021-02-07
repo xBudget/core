@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace xBudget.Identity.Test.Core.Model
+namespace xBudget.Lib.Test.Model
 {
     public class ErrorResult
     {

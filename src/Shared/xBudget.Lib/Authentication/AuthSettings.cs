@@ -1,4 +1,4 @@
-﻿namespace xBudget.Identity.Api.Extensions
+﻿namespace xBudget.Lib.Authentication
 {
     public class AuthSettings
     {

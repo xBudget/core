@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using xBudget.Identity.Api.Extensions;
 using xBudget.Identity.Api.Models;
 using xBudget.Identity.Api.Models.Core;
+using xBudget.Lib.Authentication;
 
 namespace xBudget.Identity.Api.Services
 {

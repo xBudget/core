@@ -5,22 +5,21 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using xBudget.Idenitty.Test.Core;
+using xBudget.Identity.Api.Database;
 using xBudget.Identity.Api.Models;
-using xBudget.Identity.Test.Core.Model;
+using xBudget.Lib.Test;
 using xBudget.Lib.Test.Extensions;
+using xBudget.Lib.Test.Model;
 using Xunit;
 
 namespace xBudget.Idenitty.Test.ApiTest
 {
-    public class AuthControllerTest : IClassFixture<ApplicationFactory<Identity.Api.Startup>>
+    public class AuthControllerTest : IClassFixture<ApplicationFactory<Identity.Api.Startup, IdentityDatabaseContext>>
     {
         private readonly HttpClient _client;
-        private readonly ApplicationFactory<Identity.Api.Startup> _factory;
 
-        public AuthControllerTest(ApplicationFactory<Identity.Api.Startup> factory)
+        public AuthControllerTest(ApplicationFactory<Identity.Api.Startup, IdentityDatabaseContext> factory)
         {
-            _factory = factory;
             _client = factory.CreateClient(new Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryClientOptions
             {
                 AllowAutoRedirect = false

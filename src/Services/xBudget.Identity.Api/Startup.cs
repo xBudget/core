@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using xBudget.Identity.Api.Database;
 using xBudget.Identity.Api.Extensions;
+using xBudget.Lib.Authentication;
+using Microsoft.EntityFrameworkCore;
 
 namespace xBudget.Identity.Api
 {
@@ -22,11 +23,11 @@ namespace xBudget.Identity.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         { 
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<IdentityDatabaseContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddEntityFrameworkStores<IdentityDatabaseContext>()
                 .AddDefaultTokenProviders();
 
             services.UseJwtAuthentication(Configuration);
@@ -65,6 +66,20 @@ namespace xBudget.Identity.Api
             {
                 endpoints.MapControllers();
             });
+
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                using (var databaseContext = services.GetService<IdentityDatabaseContext>())
+                {
+                    // skipe migration if the provider is InMemory (provider used on tests)
+                    if (databaseContext.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+                    {
+                        databaseContext.Database.Migrate();
+                    }                    
+                }
+            }
         }
     }
 }
